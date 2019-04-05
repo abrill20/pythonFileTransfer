@@ -9,7 +9,6 @@ def RetrFile(name, sock):
     sock.send(message.encode())
     userResponse = sock.recv(1024).decode()
     if userResponse[:2] == 'OK': 
-      print("OKKKK")
       with open(filename, 'rb') as f:
         bytesToSend = f.read(1024)
         sock.send(bytesToSend)
@@ -35,10 +34,7 @@ def Main():
     conn, addr = s.accept()
     print("Client connected ip:<" + str(addr) + ">")
     t = threading.Thread(target=RetrFile, args=("retrThread", conn))
-    print("th")
     t.start()
-    print("thread")
-  print("Closing") 
   s.close()
 
 if __name__ == '__main__':
